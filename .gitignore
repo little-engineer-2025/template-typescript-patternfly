@@ -1,0 +1,39 @@
+# Ignore by default
+**/*
+
+# Specifically indicate not ignored files
+!.gitignore
+!.dockerignore
+!Dockerfile
+!README.md
+!Makefile
+!package.json
+!package-lock.json
+!toolbox.sh
+!tsconfig.json
+!jest.config.js
+!stylePaths.js
+!webpack.common.js
+!webpack.dev.js
+!webpack.prod.js
+
+# Add templates and workflows
+!.github
+!.github/**
+!.github/**/*
+
+# Add docs
+!docs
+!docs/**
+!docs/**/*
+
+# Add source code
+!src
+!src/**
+!src/**/*.ts
+
+# Add tests
+!test
+!test/**
+!test/**/*
+
