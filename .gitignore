@@ -37,3 +37,7 @@
 !test/**
 !test/**/*
 
+# Remove snapshots
+**/__snapshots__
+**/__snapshots__/*
+
