@@ -1,18 +1,29 @@
 # Ignore by default
 **/*
 
-# Specifically indicate not ignored files
+# Include base directory files
+!LICENSE
+
+!.editorconfig
+!.eslintrc.js
+!.prettierignore
+!.prettierrc
 !.gitignore
 !.dockerignore
-!Dockerfile
-!README.md
-!Makefile
-!package.json
-!package-lock.json
-!toolbox.sh
+!.eslintrc.js
+!.editorconfig
+!.prettierignore
+!.prettierrc
 !tsconfig.json
 !jest.config.js
 !stylePaths.js
+!package.json
+!package-lock.json
+
+!Dockerfile
+!README.md
+!Makefile
+!toolbox.sh
 !webpack.common.js
 !webpack.dev.js
 !webpack.prod.js
