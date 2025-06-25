@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { ExclamationTriangleIcon } from '@patternfly/react-icons';
 import {
   Button,
   EmptyState,
@@ -7,6 +6,7 @@ import {
   EmptyStateFooter,
   PageSection,
 } from '@patternfly/react-core';
+import { ExclamationTriangleIcon } from '@patternfly/react-icons';
 import { useNavigate } from 'react-router-dom';
 
 const NotFound: React.FunctionComponent = () => {

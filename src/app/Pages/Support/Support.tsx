@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { CubesIcon } from '@patternfly/react-icons';
 import {
   Button,
   Content,
@@ -11,6 +10,7 @@ import {
   EmptyStateVariant,
   PageSection,
 } from '@patternfly/react-core';
+import { CubesIcon } from '@patternfly/react-icons';
 
 export interface ISupportProps {
   sampleProp?: string;

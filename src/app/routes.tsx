@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { AppName } from '.';
 import { Route, Routes } from 'react-router-dom';
+import { AppName } from '.';
 import { Dashboard } from '@app/Pages/Dashboard/Dashboard';
-import { Support } from '@app/Pages/Support/Support';
 import { GeneralSettings } from '@app/Pages/Settings/General/GeneralSettings';
-import { ProfileSettings } from '@app/Pages/Settings/Profile/ProfileSettings';
 import { NotFound } from '@app/Pages/NotFound/NotFound';
+import { ProfileSettings } from '@app/Pages/Settings/Profile/ProfileSettings';
+import { Support } from '@app/Pages/Support/Support';
 
 export interface IAppRoute {
   label?: string; // Excluding the label will exclude the route from the nav sidebar in AppLayout

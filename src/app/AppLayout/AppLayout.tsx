@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
 import {
   Button,
   Masthead,
@@ -17,6 +16,7 @@ import {
   SkipToContent,
 } from '@patternfly/react-core';
 import { IAppRoute, IAppRouteGroup, routes } from '@app/routes';
+import { NavLink, useLocation } from 'react-router-dom';
 import { BarsIcon } from '@patternfly/react-icons';
 
 interface IAppLayout {

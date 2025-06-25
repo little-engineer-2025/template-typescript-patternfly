@@ -1,9 +1,9 @@
-import * as React from 'react';
+import '@app/app.css';
 import '@patternfly/react-core/dist/styles/base.css';
-import { BrowserRouter as Router } from 'react-router-dom';
+import * as React from 'react';
 import { AppLayout } from '@app/AppLayout/AppLayout';
 import { AppRoutes } from '@app/routes';
-import '@app/app.css';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 const AppName: string = "Hello World";
 

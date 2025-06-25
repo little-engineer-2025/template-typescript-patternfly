@@ -56,7 +56,7 @@ module.exports = {
     "sort-imports": [
       "error",
       {
-        "ignoreDeclarationSort": true
+        "ignoreDeclarationSort": false
       }
     ],
     "@typescript-eslint/explicit-function-return-type": "off",
