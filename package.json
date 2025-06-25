@@ -1,9 +1,9 @@
 {
-  "name": "patternfly-seed",
+  "name": "patternfly-",
   "version": "0.0.2",
-  "description": "An open source build scaffolding utility for web apps.",
-  "repository": "https://github.com/patternfly/patternfly-react-seed.git",
-  "homepage": "https://patternfly-react-seed.surge.sh",
+  "description": "A typescript/patternfly/react template based on patternfly-seed for web apps.",
+  "repository": "https://github.com/little-engineer-2025/template-typescript-patternfly.git",
+  "homepage": "https://little-engineer-2025.github.io/blog/template-for-typescript-patternfly-react.html",
   "license": "MIT",
   "private": true,
   "scripts": {
