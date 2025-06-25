@@ -48,6 +48,16 @@
 !test/**
 !test/**/*
 
+# Add mocks
+!__mocks__
+!__mocks__/*
+!__mocks__/**/*
+
+# Add scripts
+!scripts
+!scripts/*
+!scripts/**/*
+
 # Remove snapshots
 **/__snapshots__
 **/__snapshots__/*
