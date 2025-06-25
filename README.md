@@ -24,7 +24,7 @@ make serve
 
 ## Contributing
 
-See: [Contributing](docs/CONTRIBUTING).
+See: [Contributing](docs/CONTRIBUTING.md).
 
 ## Security Issues
 
