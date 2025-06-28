@@ -12,25 +12,24 @@ assignees:
 body:
   - type: markdown
     attributes:
-      values: |
+      value: |
         Thanks for your question, please ping us if we do not response in 7 days
         @avisiedo @little-engineer-2025
-  - type: markdown
+  - type: textarea
     id: question
     attributes:
       label: Indicate your question and all the required context for it
-      values: |
+      value: |
         How could I ... ?
         Why do not ... ?
         Could I use ... ?
       placeholder: note down your question and necessary context
     validations:
       required: true
-  - type: markdown
+  - type: textarea
     id: additional-context
-    atttributes:
+    attributes:
       label: Indicate additional context to your question
-      values:
       placeholder: add any additional context to your question
     validations:
       required: false
