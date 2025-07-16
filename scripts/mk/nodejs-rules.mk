@@ -3,7 +3,9 @@
 ##
 
 NPM ?= $(shell which npm)
-APITARGET := src/api/todo
+OPENAPI_TARGET := src/api
+OPENAPI_LIST := $(wildcard api/*.yaml)
+OPENAPI_GEN_TEMPLATE ?= typescript-redux-query
 
 .PHONY: all
 all: clean format lint test build
@@ -13,15 +15,18 @@ deps:  ## Install dependencies
 	$(NPM) install
 
 # see: https://github.com/OpenAPITools/openapi-generator/blob/master/docs/generators/typescript-redux-query.md
-.PHONY: generate
-generate-client: ## Generate consumes API REST clients
-	@rm -rf "$(APITARGET)"
+.PHONY: generate-clients
+generate-clients:  ## Generate API REST clients
+	@rm -rf "$(OPENAPI_TARGET)"
+	for item in $(OPENAPI_LIST); do item="$${item#api/}"; item="$${item%.yaml}"; $(MAKE) "$(OPENAPI_TARGET)/$${item}"; done
+
+$(OPENAPI_TARGET)/%: api/%.yaml
 	TS_POST_PROCESS_FILE="npx prettier --write" \
 	npx openapi-generator-cli -- \
-	   generate --enable-post-process-file \
-	     -i OPENAPISPEC.yaml \
-	     -g typescript-axios \
-	     -o "$(APITARGET)"
+	  generate --enable-post-process-file \
+	    -i "$<" \
+	    -g $(OPENAPI_GEN_TEMPLATE) \
+	    -o "$@"
 
 .PHONY: start-dev
 start-dev:  ## Start the development server
