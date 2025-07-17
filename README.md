@@ -40,6 +40,12 @@ See: [Security](docs/SECURITY.md).
 
 See: [Documentation](docs/index.md).
 
-## References
+## References and licenses
 
+This repository is published under the apache-2 license. See LICENSE file.
+
+Additionally mention:
+
+- patternfly-seed repository use MIT license and was used as starting point for
+  creating this one.
 
