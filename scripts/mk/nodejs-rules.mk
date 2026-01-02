@@ -36,6 +36,14 @@ start-dev:  ## Start the development server
 build:  ## Build production build
 	$(NPM) run build
 
+.PHONY: doc-build
+doc-build:  ## Build documentation
+	$(NPM) run styleguide:build
+
+.PHONY: doc-server
+doc-server:  ## Start documentation development server
+	$(NPM) run styleguide
+
 .PHONY: test
 test:  ## Run all the tests
 	$(NPM) run test
