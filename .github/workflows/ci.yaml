@@ -6,62 +6,108 @@ on:
       - main
       - release*
 
+env:
+  NODE_VERSION: 22
+
 jobs:
-  format:
-    name: Format
+  cache:
+    name: Cache
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v3
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: lts/*
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Cache Node Modules
+        uses: actions/cache@v4
+        # https://github.com/actions/cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
-        run: npm install
+        run: npm install --frozen-lockfile
+
+  format:
+    name: Format
+    needs: cache
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Cache Node Modules
+        uses: actions/cache@v4
+        # https://github.com/actions/cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+
       - name: Run format
         run: |
           npm run format
           git diff
   lint:
     name: Lint
+    needs: cache
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v3
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: lts/*
-      - name: Install dependencies
-        run: npm install
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Cache Node Modules
+        uses: actions/cache@v4
+        # https://github.com/actions/cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+
       - name: Run eslint
         run: npm run lint
   test:
     name: Test
+    needs: cache
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v3
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: lts/*
-      - name: Install dependencies
-        run: npm install
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Cache Node Modules
+        uses: actions/cache@v4
+        # https://github.com/actions/cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+
       - name: Run tests
         run: npm run test
   build:
     name: Build
+    needs: ["test", "lint", "format"]
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v3
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: lts/*
-      - name: Install dependencies
-        run: npm install
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Cache Node Modules
+        uses: actions/cache@v4
+        # https://github.com/actions/cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+
       - name: Attempt a build
         run: npm run build
