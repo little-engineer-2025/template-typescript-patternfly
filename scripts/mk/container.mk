@@ -3,6 +3,8 @@
 # manager (podman or docker).
 ##
 
+QUAY_EXPIRATION ?= 1d
+
 ifneq (,$(shell command podman -v 2>/dev/null))
 CONTAINER_ENGINE ?= podman
 else
@@ -25,37 +27,26 @@ endif
 CONTAINER_REGISTRY_USER ?= $(USER)
 CONTAINER_REGISTRY ?= quay.io
 CONTAINER_CONTEXT_DIR ?= .
-CONTAINER_FILE ?= build/package/Dockerfile
-CONTAINER_IMAGE_BASE ?= $(CONTAINER_REGISTRY)/$(CONTAINER_REGISTRY_USER)/myapp
+CONTAINER_FILE ?= Dockerfile
+CONTAINER_IMAGE_BASE ?= $(CONTAINER_REGISTRY)/$(CONTAINER_REGISTRY_USER)/todo-frontend
 CONTAINER_IMAGE_TAG ?= $(shell git rev-parse --short HEAD)
 CONTAINER_IMAGE ?= $(CONTAINER_IMAGE_BASE):$(CONTAINER_IMAGE_TAG)
 # CONTAINER_BUILD_OPTS
 # CONTAINER_ENGINE_OPTS
 # CONTAINER_RUN_ARGS
 
-# if go is available, mount user's Go module and build cache to speed up dev builds.
-ifneq (,$(shell command go 2>&1 >/dev/null))
-USE_GO_CACHE = true
-CONTAINER_BUILD_OPTS += -v "$(shell go env GOCACHE):/opt/app-root/src/.cache/go-build$(CONTAINER_VOL_SUFFIX)"
-CONTAINER_BUILD_OPTS += -v "$(shell go env GOMODCACHE):/opt/app-root/src/go/pkg/mod$(CONTAINER_VOL_SUFFIX)"
-else
-USE_GO_CACHE = false
-endif
-
 .PHONY: registry-login
 registry-login:
 	$(CONTAINER_ENGINE) login -u "$(CONTAINER_REGISTRY_USER)" -p "$(CONTAINER_REGISTRY_TOKEN)" $(CONTAINER_REGISTRY)
 
 .PHONY: container-build
-container-build: QUAY_EXPIRATION ?= never
 container-build:  ## Build image CONTAINER_IMAGE from CONTAINER_FILE using the CONTAINER_CONTEXT_DIR
-	$(USE_GO_CACHE) && mkdir -p $(shell go env GOCACHE) $(shell go env GOMODCACHE) || true
 	$(CONTAINER_ENGINE) build \
 	  --label "quay.expires-after=$(QUAY_EXPIRATION)" \
 	  $(CONTAINER_BUILD_OPTS) \
 	  -t "$(CONTAINER_IMAGE)" \
-	  $(CONTAINER_CONTEXT_DIR) \
-	  -f "$(CONTAINER_FILE)"
+	  -f "$(CONTAINER_FILE)" \
+	  $(CONTAINER_CONTEXT_DIR)
 	@# prune builder container
 	$(CONTAINER_ENGINE) image prune --filter label=todo-backend=builder --force
 
