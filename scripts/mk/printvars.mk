@@ -9,4 +9,4 @@ printvars: ## Print variable name and values
 
 .PHONY: printenvcfg
 printenvcfg: ## Print the environment the resulting exported environment
-	@env | grep -P -e '^(APP|CONFIG_PATH|DATABASE|KAFKA|LOGGING|WEB)(_.*)?=' | sort
+	@env | grep -P -e '^(APP|CONFIG|DATABASE|KAFKA|LOGGING|WEB)(_.*)?=' | sort
