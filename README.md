@@ -24,8 +24,11 @@ toolbox.sh create
 
 ```bash
 toolbox.sh enter
-make format lint test build
-make start-dev
+make format     # Run prettier to align to the format style
+make lint       # Run linter on the source code
+make test       # Run tests
+make build      # Build the source code into the dist/ directory
+make start-dev  # Start development server so the page reload with the new changes
 ```
 
 ## Contributing
