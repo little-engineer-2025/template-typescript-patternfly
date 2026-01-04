@@ -33,6 +33,11 @@
 !.github/**
 !.github/**/*
 
+# Add deploy directory
+!deploy
+!deploy/**
+!deploy/**/*
+
 # Add docs
 !docs
 !docs/**

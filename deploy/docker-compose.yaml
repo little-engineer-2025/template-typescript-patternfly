@@ -1,0 +1,13 @@
+# https://docs.docker.com/reference/compose-file/
+services:
+  frontend:
+    build:
+      image: ${CONTAINER_IMAGE_BASE}:${CONTAINER_TAG}
+      context: ../
+      dockerfile: Dockerfile
+    volumes:
+      - ./app:/app
+    ports:
+      - "9000:80"
+    environment:
+      NODE_ENV: development
